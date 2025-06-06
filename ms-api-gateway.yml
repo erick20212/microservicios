@@ -1,0 +1,50 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: ms-usuarios
+
+  datasource:
+    url: jdbc:oracle:thin:@host.docker.internal:1521/XE
+    username: C##quichua5
+    password: erick
+    driver-class-name: oracle.jdbc.OracleDriver
+
+  jpa:
+    database-platform: org.hibernate.dialect.OracleDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: katalccacondori515@gmail.com
+    password: yxzjkmnkqztifqst
+    protocol: smtp
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+info:
+  app:
+    name: MS-USUARIOS
+    description: Microservicio de usuarios
+    version: 1.0.0
+
+jwt:
+  secret: "MiClaveSecretaSuperLargaYSeguraQueTieneAlMenos512BitsDeLongitud"
+
+app:
+  owner:
+    token: "nosewey"
