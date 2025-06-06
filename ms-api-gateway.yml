@@ -1,0 +1,37 @@
+server:
+  port: 8084  # Puerto del API Gateway
+
+spring:
+  application:
+    name: ms-api-gateway
+
+  cloud:
+    gateway:
+      routes:
+        # Ruta para ms-productos
+        - id: ms-productos
+          uri: http://localhost:8082
+          predicates:
+            - Path=/api/productos/**
+
+        # Ruta para ms-usuarios
+        - id: ms-usuarios
+          uri: http://localhost:8081
+          predicates:
+            - Path=/api/permissions/**, /api/roles/**, /api/userroles/**, /api/rolespermisos/**, /api/usuarios/**
+
+        # Ruta para ms-categorias
+        - id: ms-categorias
+          uri: http://localhost:8083
+          predicates:
+            - Path=/api/categorias/**
+
+  main:
+    web-application-type: reactive  # Forzar modo WebFlux para evitar conflictos
+
+jwt:
+  secret: MiClaveSecretaSuperLargaYSeguraQueTieneAlMenos512BitsDeLongitud
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
